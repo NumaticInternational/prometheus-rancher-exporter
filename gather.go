@@ -87,8 +87,10 @@ func (e *Exporter) processMetrics(data *Data, endpoint string, hideSys bool, ch 
 				log.Warnf("Failed to obtain stack_name for %s from the API", x.Name)
 			}
 
-			if x.LaunchConfig != nil && len(x.LaunchConfig.Labels) > 0 {
+			if x.LaunchConfig != nil && len(x.LaunchConfig.Labels) != 0 {
 				filteredLabels = e.allowedLabels(x.LaunchConfig.Labels)
+			} else {
+				filteredLabels = make(map[string]string)
 			}
 
 			if err := e.setServiceMetrics(x.Name, stackName, x.State, x.HealthState, x.Scale, filteredLabels); err != nil {
