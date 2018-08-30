@@ -1,5 +1,5 @@
 FROM golang:1.9.1-alpine3.6 as builder
-LABEL maintainer="Infinity Works"
+LABEL maintainer="Numatic International"
 
 
 COPY . /go/src/github.com/infinityworks/prometheus-rancher-exporter
